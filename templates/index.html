@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediksi Kecepatan Arus Laut - BMKG</title>
+    <link rel="icon" href="../static/Logo-BMKG@0.5x.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f8ff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            max-width: 900px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .form-section, .result-section {
+            padding: 30px;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .form-section {
+            background-color: #e6f2ff;
+        }
+
+        h1, h2, h3 {
+            color: #003366;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 4px;
+            margin-bottom: 16px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+        }
+
+        button {
+            background-color: #0059b3;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #004080;
+        }
+
+        .result-section {
+            text-align: center;
+            background-color: #ffffff;
+        }
+
+        img.logo {
+            width: 130px;
+            margin-bottom: 20px;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.3em;
+            color: #006600;
+        }
+
+        /* Responsive untuk mobile */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .form-section, .result-section {
+                width: 100%;
+                padding: 20px;
+            }
+
+            h1, h2, h3 {
+                font-size: 1.2em;
+                text-align: center;
+            }
+
+            input[type="number"] {
+                font-size: 1em;
+                padding: 10px;
+            }
+
+            button {
+                font-size: 1em;
+                padding: 12px;
+            }
+
+            img.logo {
+                width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Form Input -->
+        <div class="form-section">
+            <h1>Prediksi Arus Laut</h1>
+            <form method="POST" autocomplete="off">
+                <label>Longitude (contoh: 106.822):
+                    <input type="number" name="longitude" step="0.001" placeholder="Contoh: 106.822" required>
+                </label>
+                <label>Latitude (contoh: -6.208):
+                    <input type="number" name="latitude" step="0.001" placeholder="Contoh: -6.208" required>
+                </label>
+                <label>Kecepatan Arus Saat Ini (m/s):
+                    <input type="number" name="velocity" step="0.01" placeholder="Contoh: 0.45" required>
+                </label>
+                <label>Tahun:
+                    <input type="number" name="year" placeholder="Contoh: 2025" required>
+                </label>
+                <label>Bulan:
+                    <input type="number" name="month" min="1" max="12" placeholder="1 - 12" required>
+                </label>
+                <label>Tanggal:
+                    <input type="number" name="day" min="1" max="31" placeholder="1 - 31" required>
+                </label>
+                <label>Jam (0 - 23):
+                    <input type="number" name="hour" min="0" max="23" placeholder="Contoh: 14" required>
+                </label>
+                <button type="submit">Prediksi Kecepatan</button>
+            </form>
+        </div>
+
+        <!-- Hasil Prediksi -->
+        <div class="result-section">
+            <img src="../static/Logo-BMKG@0.5x.png" alt="Logo BMKG" class="logo">
+            <h3>BMKG Stasiun Meteorologi Maritim Merak</h3>
+            <h2>Hasil Prediksi</h2>
+            {% if prediction %}
+                <div class="result">
+                    <strong>{{ prediction }} m/s</strong><br>
+                </div>
+            {% else %}
+                <p>Belum ada prediksi.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
